@@ -100,6 +100,13 @@ class JTAGOpenOCDApplet(GlasgowApplet):
         glasgow run jtag-openocd unix:/tmp/jtag.sock
         openocd -c 'adapter driver remote_bitbang; transport select jtag' \\
             -c 'remote_bitbang host /tmp/jtag.sock'
+
+    If your OpenOCD is new enough (at least v0.13, or current git HEAD), you
+    can improve debugging performance like this:
+
+    - Set the clock frequency with `--freq N` on the glasgow command line
+      (Replace N with the desired clock frequency in kHz).
+    - Add `remote_bitbang use_remote_sleep on` to the OpenOCD commands.
     """
 
     __pins = ("tck", "tms", "tdi", "tdo", "trst", "srst")
