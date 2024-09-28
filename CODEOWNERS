@@ -17,3 +17,5 @@
 /software/glasgow/applet/servo/                         @tpwrules
 
 /software/glasgow/applet/interface/spi_flashrom/        @neuschaefer
+/software/glasgow/applet/debug/powerpc/                 @neuschaefer
+/software/glasgow/arch/powerpc/                         @neuschaefer

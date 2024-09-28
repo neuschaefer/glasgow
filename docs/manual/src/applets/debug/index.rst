@@ -12,3 +12,4 @@ MCU debugging
     arm
     arm7
     mips
+    ppc-e300

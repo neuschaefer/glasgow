@@ -984,6 +984,10 @@ class JTAGProbeApplet(GlasgowAppletV2):
     # and `tap_iface` is present.
     requires_tap = False
 
+    # To be overridden in derived applets. If true, a Test-Reset is performed
+    # before scanning the JTAG chain.
+    requires_test_reset = False
+
     @classmethod
     def add_build_arguments(cls, parser, access):
         access.add_voltage_argument(parser)
@@ -1041,6 +1045,9 @@ class JTAGProbeApplet(GlasgowAppletV2):
         self.jtag_iface.scan_ir_max_length = args.scan_ir_max_length
         self.jtag_iface.scan_dr_max_length = args.scan_dr_max_length
         await self.jtag_iface.clock.set_frequency(args.frequency * 1000)
+
+        if self.requires_test_reset:
+            await self.jtag_iface.test_reset()
 
         if self.requires_tap:
             dr_value, ir_value = await self.jtag_iface.scan_reset_dr_ir()
